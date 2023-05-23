@@ -36,7 +36,7 @@ stages: # List of stages for jobs, and their order of execution
 audit-job:
   stage: audit
   script:
-    - npm audit fix
+    - npm audit
 
 build-job: # This job runs in the build stage, which runs first.
   stage: build
