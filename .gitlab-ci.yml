@@ -28,9 +28,15 @@ before_script:
   - npm ci --cache .npm --prefer-offline
 
 stages:          # List of stages for jobs, and their order of execution
+  - audit
   - build
   - test
   #- deploy
+
+audit-job:
+  stage: audit
+  script:
+    - npm audit
 
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
@@ -54,11 +60,8 @@ unit-test-job:   # This job runs in the test stage.
     - Xvfb :0 -ac -screen 0 1024x768x24 &
     # Export display for Chrome
     - export DISPLAY=:99
-    # Install AngularJS CLI exclusively
-    # Add --unsafe-perm to resolve problems with node-gyp infinite loop on Docker
-    - npm install --silent --unsafe-perm -g @angular/cli@1.1.2
-    # Install remaining project dependencies
-    - npm install --silent
+    # Install project dependencies
+    - npm ci --cache .npm --prefer-offline
     # Download Selenium server JAR, drivers for Chrome
     - node ./node_modules/.bin/webdriver-manager update
   script:
