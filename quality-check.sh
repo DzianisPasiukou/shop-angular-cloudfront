@@ -1,4 +1,4 @@
 npm run lint
-npm run test
-npm run audit
+npm run test:ci
+npm audit
 #static code analysis
