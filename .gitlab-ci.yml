@@ -64,7 +64,7 @@ unit-test-job: # This job runs in the test stage.
     # Install project dependencies
     - npm ci --cache .npm --prefer-offline
     # Download Selenium server JAR, drivers for Chrome
-    - node ./node_modules/.bin/webdriver-manager update
+    #- node ./node_modules/.bin/webdriver-manager update
   script:
     - echo "Running unit tests..."
     - npm run test:ci
